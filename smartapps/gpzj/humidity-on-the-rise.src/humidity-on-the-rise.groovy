@@ -50,7 +50,7 @@ def initialize() {
 
 def humidityChangeCheck(evt) {
   log.debug "handler $evt.name: $evt.value"
-  def mostRecent20Events = somedevice.events(max: 20)
+  def mostRecent20Events = humiditySensor.events(max: 20)
 
   def message = "$evt.name: $evt.value $humiditySensor $evt"
   def message = mostRecent20Events
