@@ -24,7 +24,7 @@ preferences {
   }
   section("Alerting") {
      input "phoneNum", "phone", title: "SMS Phone Number.", required: false, multiple: true
-     input "sendPush", "bool", title: "Send Push Notification?", required: false
+     //input "sendPush", "bool", title: "Send Push Notification?", required: false
   }
 }
 
