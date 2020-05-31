@@ -22,12 +22,11 @@ preferences {
   section("Bathroom Fan") {
     input "bathroomFan", "capability.switch", title: "Choose Bathroom Fan Switch"
   }
-  section("Send Push Notification?") {
-    input "sendPush", "bool", required: false,
-              title: "Send Push Notification?"
+  section("Alerting") {
+     input "phoneNum", "phone", title: "SMS Phone Number.", required: false, multiple: true
   }
-  section("SMS Alerting") {
-   input "phoneNum", "phone", title: "SMS Phone Number.", required: false, multiple: true
+     input "sendPush", "bool", required: false,
+              title: "Send Push Notification?"
   }
 }
 
