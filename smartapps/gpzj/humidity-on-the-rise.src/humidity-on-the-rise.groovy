@@ -6,7 +6,7 @@
  */
 
 definition(
-    name: "Bathroom Fan On When Humidity Quickly Rises",
+    name: "humidity-on-the-rise",
     namespace: "gpzj",
     author: "Justin Wildeboer",
     description: "Bathroom Fan On When Humidity Quickly Rises (And shut off on the decline)",
