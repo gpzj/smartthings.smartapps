@@ -45,4 +45,5 @@ def initialize() {
 
 def humidityChangeCheck(evt) {
   log.debug "handler $evt.name: $evt.value"
+  bathroomFan.on()
 }
