@@ -55,9 +55,9 @@ def humidityChangeCheck(evt) {
   log.debug "event $mostRecent20Events"
   // log.debug "event ${mostRecent20Events[0]}"
   def message = "$evt.name: $evt.value $humiditySensor"
-    if (sendPush) {
-        sendPush(message)
-    }
+  //  if (sendPush) {
+  //      sendPush(message)
+  // }
     if (phoneNum) {
         sendSms(phoneNum, message)
     }
