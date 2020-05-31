@@ -17,7 +17,7 @@ definition(
 
 preferences {
   section("Humidity Sensor") {
-    input "humiditySensor", "capability.relativeHumidityMeasurement", title: "Choose Humidity Sensor"
+    input "humiditySensor", "capability.relativeHumidityMeasurement", multiple: true, title: "Choose Humidity Sensor"
   }
   section("Bathroom Fan") {
     input "bathroomFan", "capability.switch", title: "Choose Bathroom Fan Switch"
@@ -25,7 +25,10 @@ preferences {
   section("Send Push Notification?") {
     input "sendPush", "bool", required: false,
               title: "Send Push Notification?"
-    }
+  }
+  section("SMS Alerting") {
+   input "phoneNum", "phone", title: "SMS Phone Number.", required: false, multiple: true
+  }
 }
 
 def installed() {
@@ -50,8 +53,11 @@ def initialize() {
 
 def humidityChangeCheck(evt) {
   log.debug "handler $evt.name: $evt.value"
-  def message = "handler $evt.name: $evt.value $humiditySensor"
+  def message = "$evt.name: $evt.value $humiditySensor $humiditySensor.humidity"
     if (sendPush) {
         sendPush(message)
+    }
+    if (phoneNum) {
+        sendSms(phoneNum, message)
     }
 }
