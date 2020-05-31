@@ -51,10 +51,12 @@ def initialize() {
 def humidityChangeCheck(evt) {
   log.debug "handler $evt.name: $evt.value"
   def mostRecent20Events = humiditySensor.events(max: 5)
-
-  def message = "$evt.name: $evt.value $humiditySensor $evt"
+  log.debug "event $mostRecent20Events[0]"
+  log.debug "event $mostRecent20Events"
+  log.debug "event ${mostRecent20Events[0]}"
+  def message = "$evt.name: $evt.value $humiditySensor ${evt}"
     if (sendPush) {
-        sendPush(mostRecent20Events)
+        sendPush(message)
     }
     if (phoneNum) {
         sendSms(phoneNum, message)
