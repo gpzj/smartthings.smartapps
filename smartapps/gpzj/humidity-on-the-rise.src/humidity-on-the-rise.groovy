@@ -50,7 +50,7 @@ def initialize() {
 
 def humidityChangeCheck(evt) {
   log.debug "handler $evt.name: $evt.value"
-  def message = "$evt.name: $evt.value $humiditySensor $humiditySensor.humidity"
+  def message = "$evt.name: $evt.value $humiditySensor $evt"
     if (sendPush) {
         sendPush(message)
     }
