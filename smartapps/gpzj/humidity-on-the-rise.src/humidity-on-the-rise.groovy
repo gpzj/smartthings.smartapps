@@ -49,12 +49,12 @@ def initialize() {
 }
 
 def humidityChangeCheck(evt) {
-  log.debug "handler $evt.name: $evt.value"
+  log.debug "${evt}" // handler $evt.name: $evt.value"
   def mostRecent20Events = humiditySensor.events(max: 5)
-  log.debug "event $mostRecent20Events[0]"
+  // log.debug "event $mostRecent20Events[0]"
   log.debug "event $mostRecent20Events"
-  log.debug "event ${mostRecent20Events[0]}"
-  def message = "$evt.name: $evt.value $humiditySensor ${evt}"
+  // log.debug "event ${mostRecent20Events[0]}"
+  def message = "$evt.name: $evt.value $humiditySensor"
     if (sendPush) {
         sendPush(message)
     }
