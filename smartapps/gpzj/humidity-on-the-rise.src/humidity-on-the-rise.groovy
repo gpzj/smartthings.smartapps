@@ -22,6 +22,10 @@ preferences {
   section("Bathroom Fan") {
     input "bathroomFan", "capability.switch", title: "Choose Bathroom Fan Switch"
   }
+  section("Send Push Notification?") {
+    input "sendPush", "bool", required: false,
+              title: "Send Push Notification?"
+    }
 }
 
 def installed() {
@@ -41,9 +45,13 @@ def uninstall() {
 
 def initialize() {
     subscribe(humiditySensor, "humidity", humidityChangeCheck)
+    subscribe(bathroomFan, "switch", humidityChangeCheck)
 }
 
 def humidityChangeCheck(evt) {
   log.debug "handler $evt.name: $evt.value"
-  bathroomFan.on()
+  def message = "handler $evt.name: $evt.value $humiditySensor"
+    if (sendPush) {
+        sendPush(message)
+    }
 }
