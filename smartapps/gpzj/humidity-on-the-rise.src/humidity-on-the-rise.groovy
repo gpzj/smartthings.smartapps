@@ -46,14 +46,13 @@ def uninstall() {
 
 def initialize() {
     // subscribe(humiditySensor, "humidity", humidityChangeCheck)
-    state.count = 0
     runEvery1Minute(humidityChangeCheck)
 }
 
 def humidityChangeCheck() {
     def currentHumidity = humiditySensor.currentValue("humidity")
-    state.count = state.count + 1
-    def message = "Current Humidity: $currentHumidity count $state.count"
+    state.previous = $currentHumidity
+    def message = "Current Humidity: $currentHumidity Previous: $state.previous"
     if (sendPushMessage) {
         sendPush(message)
     }
