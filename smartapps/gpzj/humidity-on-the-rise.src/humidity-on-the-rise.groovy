@@ -52,7 +52,7 @@ def initialize() {
 def humidityChangeCheck() {
     def currentHumidity = humiditySensor.currentValue("humidity")
     def message = "Current Humidity: $currentHumidity Previous: $state.previous"
-    state.previous = $currentHumidity
+    state.previous = currentHumidity
     if (sendPushMessage) {
         sendPush(message)
     }
