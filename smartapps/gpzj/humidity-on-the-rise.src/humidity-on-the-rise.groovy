@@ -23,8 +23,7 @@ preferences {
     input "bathroomFan", "capability.switch", title: "Choose Bathroom Fan Switch"
   }
   section("Alerting") {
-     input "phoneNum", "phone", title: "SMS Phone Number.", required: false, multiple: true
-     //input "sendPush", "bool", title: "Send Push Notification?", required: false
+     input "phone", "phone", title: "SMS Phone Number.", required: false, multiple: true
   }
 }
 
@@ -49,16 +48,8 @@ def initialize() {
 }
 
 def humidityChangeCheck(evt) {
-  log.debug "${evt}" // handler $evt.name: $evt.value"
-  def mostRecent20Events = humiditySensor.events(max: 5)
-  // log.debug "event $mostRecent20Events[0]"
-  log.debug "event $mostRecent20Events"
-  // log.debug "event ${mostRecent20Events[0]}"
   def message = "$evt.name: $evt.value $humiditySensor"
-  //  if (sendPush) {
-  //      sendPush(message)
-  // }
     if (phoneNum) {
-        sendSms(phoneNum, message)
+        sendSms(phone, message)
     }
 }
