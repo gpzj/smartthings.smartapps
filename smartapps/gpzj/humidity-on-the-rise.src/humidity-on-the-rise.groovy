@@ -43,13 +43,14 @@ def uninstall() {
 }
 
 def initialize() {
-    subscribe(humiditySensor, "humidity", humidityChangeCheck)
-    subscribe(bathroomFan, "switch", humidityChangeCheck)
+    // subscribe(humiditySensor, "humidity", humidityChangeCheck)
+    runEvery1Minute(humidityChangeCheck)
 }
 
-def humidityChangeCheck(evt) {
-  def message = "$evt.name: $evt.value $humiditySensor"
-    if (phoneNum) {
+def humidityChangeCheck() {
+  def currentHumidity = humiditySensor.currentValue("humidity")
+  def message = "Current Humidity: $currentHumidity"
+    if (phone) {
         sendSms(phone, message)
     }
 }
