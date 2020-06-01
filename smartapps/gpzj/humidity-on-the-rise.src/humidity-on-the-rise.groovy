@@ -16,30 +16,31 @@ definition(
 )
 
 preferences {
-  section("Humidity Sensor") {
-    input "humiditySensor", "capability.relativeHumidityMeasurement", multiple: true, title: "Choose Humidity Sensor"
-  }
-  section("Bathroom Fan") {
-    input "bathroomFan", "capability.switch", title: "Choose Bathroom Fan Switch"
-  }
-  section("Alerting") {
-     input "phone", "phone", title: "SMS Phone Number.", required: false, multiple: true
-  }
+    section("Humidity Sensor") {
+        input "humiditySensor", "capability.relativeHumidityMeasurement", multiple: true, title: "Choose Humidity Sensor"
+    }
+    section("Bathroom Fan") {
+        input "bathroomFan", "capability.switch", title: "Choose Bathroom Fan Switch"
+    }
+    section("Alerting") {
+        input "phone", "phone", title: "SMS Phone Number.", required: false, multiple: true
+        input "sendPushMessage", "bool", title: "Push notifications", required:true, defaultValue:false
+    }
 }
 
 def installed() {
-  log.debug "${app.label} installed with settings: ${settings}"
-  initialize()
+    log.debug "${app.label} installed with settings: ${settings}"
+    initialize()
 }
 
 def updated() {
-  log.debug "${app.label} updated with settings: ${settings}"
-  initialize()
+    log.debug "${app.label} updated with settings: ${settings}"
+    initialize()
 }
 
 def uninstall() {
-  log.debug "${app.label} uninstalled"
-  unsubscribe()
+    log.debug "${app.label} uninstalled"
+    unsubscribe()
 }
 
 def initialize() {
@@ -48,9 +49,13 @@ def initialize() {
 }
 
 def humidityChangeCheck() {
-  def currentHumidity = humiditySensor.currentValue("humidity")
-  def message = "Current Humidity: $currentHumidity"
+    def currentHumidity = humiditySensor.currentValue("humidity")
+    def message = "Current Humidity: $currentHumidity"
+    if (sendPushMessage) {
+        sendPush(message)
+    }
     if (phone) {
         sendSms(phone, message)
     }
+
 }
