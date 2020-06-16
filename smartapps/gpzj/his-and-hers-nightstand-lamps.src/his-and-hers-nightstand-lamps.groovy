@@ -75,6 +75,8 @@ def doublePress() {
 }
 
 def mainHandler(evt) {
+    def data = parseJson(evt.data)
+    log.debug "event data: ${data}"
     log.debug "switchOnHandler called: $evt"
     if ($evt.value == pressed) {
         log.debug "Toggling $myLamp."
