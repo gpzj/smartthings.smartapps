@@ -45,7 +45,7 @@ def updated() {
 }
 
 def initialize() {
-	#def bothLights = settings.collect {k, device
+    // def bothLights = settings.collect {k, device
     subscribe(myButton, "button", mainHandler)
 }
 
@@ -68,7 +68,7 @@ def doublePress() {
             $theirLamp.off()
 	}
     } else {
-        # put these in a collection $bothLights
+        // put these in a collection $bothLights
         $myLamp.on()
         $theirLamp.on()
     }
