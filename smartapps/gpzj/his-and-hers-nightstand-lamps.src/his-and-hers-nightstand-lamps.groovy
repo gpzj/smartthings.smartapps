@@ -79,8 +79,8 @@ def mainHandler(evt) {
     if ($evt.value == pressed) {
         log.debug "Toggling $myLamp."
         toggleMyLamp()
-    }
-    if ($evt.value == held) {
+    } else if ($evt.value == held) {
         log.debug "Double Pressed."
         doublePress() 
+    }
 }
