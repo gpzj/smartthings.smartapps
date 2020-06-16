@@ -45,6 +45,7 @@ def updated() {
 }
 
 def initialize() {
+	#def bothLights = settings.collect {k, device
     subscribe(myButton, "button", mainHandler)
 }
 
@@ -65,8 +66,9 @@ def doublePress() {
         } else {
             $myLamp.off()
             $theirLamp.off()
+	}
     } else {
-        # Can I combine these to happen at once?
+        # put these in a collection $bothLights
         $myLamp.on()
         $theirLamp.on()
     }
